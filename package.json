@@ -1,0 +1,32 @@
+{
+  "name": "chinese",
+  "version": "1.0.0",
+  "description": "中学 高中语文",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinglf000/chinese.git"
+  },
+  "keywords": [
+    "chinese",
+    "中学",
+    "语文",
+    "高中"
+  ],
+  "author": "jinglf000",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jinglf000/chinese/issues"
+  },
+  "homepage": "https://github.com/jinglf000/chinese#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "cheerio": "^1.0.0-rc.2",
+    "iconv-lite": "^0.4.19",
+    "koa": "^2.4.1",
+    "koa-logger": "^3.1.0"
+  }
+}

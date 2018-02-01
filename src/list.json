@@ -1,0 +1,17 @@
+[
+  {
+    "name": "七年级上册",
+    "id": "sevenUp",
+    "path": "/teach/57701.html"
+  },
+  {
+    "name": "七年级下册",
+    "id": "sevenDown",
+    "path": "/teach/21713.html"
+  },
+  {
+    "name": "八年级下册",
+    "id": "eightDown",
+    "path":"/teach/22868.html"
+  }
+]
