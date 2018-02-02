@@ -1,4 +1,3 @@
-
 /* 
  * 获取课文文字内容
  * 
@@ -19,8 +18,7 @@ const coreUrl = 'm.sbkk88.com';
  */
 module.exports.getArticleYear = (data) => {
   const list = [];
-  const dataUtf8 = iconv.decode(data, 'gb2312')
-  const $ = cheerio.load(dataUtf8, {
+  const $ = cheerio.load(data, {
     decodeEntities: false
   });
   $('.index_list1 a').each((index, ele) => {
@@ -60,5 +58,8 @@ function serizeList(ele, $) {
   if (url.indexOf(coreUrl) < 0) {
     url = baseUrl + url;
   }
-  return {url, title};
+  return {
+    url,
+    title
+  };
 }

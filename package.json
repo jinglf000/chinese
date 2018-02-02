@@ -27,6 +27,7 @@
     "cheerio": "^1.0.0-rc.2",
     "iconv-lite": "^0.4.19",
     "koa": "^2.4.1",
-    "koa-logger": "^3.1.0"
+    "koa-logger": "^3.1.0",
+    "request": "^2.83.0"
   }
 }
