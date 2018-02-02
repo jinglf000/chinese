@@ -18,6 +18,7 @@ const coreUrl = 'm.sbkk88.com';
  */
 module.exports.getArticleYear = (data) => {
   const list = [];
+  console.log(data);
   const $ = cheerio.load(data, {
     decodeEntities: false
   });

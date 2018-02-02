@@ -15,14 +15,19 @@ axios.defaults.proxy = {
   host: '127.0.0.1',
   port: 8888
 }
-
+// 接口编码处理
 // axios.interceptors.response.use(function (response) {
-//   var ctype = response.headers["content-type"];
-//   response.data = ctype.includes("charset=GB2312") ?
-//     iconv.decode(response.data, 'gb2312') :
-//     iconv.decode(response.data, 'utf-8');
+//   const ctype = response.headers['content-type'];
+//   // response.data = ctype.includes('charset=GB2312') ? 
+//   //   iconv.decode(response.data, 'gb2312') :
+//   //   iconv.decode(response.data, 'utf-8');
+//   console.log( '原始值： ',response.data);
+//   response.data = iconv.decode(response.data, 'utf-8');
+
+//   console.log('gb2312 后的值', response.data);
 //   return response;
-// })
+// });
+
 
 const app = new Koa();
 
@@ -37,7 +42,7 @@ app.use(async (ctx, next) => {
 
     const duration = 6;
     for (let i = 0; i < yuwen.length; i++) {
-      console.log(yuwen[i]);
+      // console.log(yuwen[i]);
     }
 
   } catch (err) {
@@ -46,4 +51,5 @@ app.use(async (ctx, next) => {
 });
 
 
-app.listen(3001);
+app.listen(9999);
+console.log('server is runing at 9999');
