@@ -1,14 +1,14 @@
 const Koa = require('koa');
 const axios = require('axios');
-// const cheerio = require('cheerio');
+const cheerio = require('cheerio');
 const Logger = require('koa-logger');
 const url = require('url');
 const chalk = require('chalk');
 const iconv = require('iconv-lite');
-const ajax = require('./ajax');
+
 
 const utils = require('./utils');
-const getChinese = require('./getChinese');
+const serize = require('./serizeArticle');
 
 // 配置axios 代理用于抓包
 axios.defaults.proxy = {
@@ -36,15 +36,29 @@ app.use(new Logger());
 app.use(async (ctx, next) => {
   try {
     const baseUrl = 'http://m.sbkk88.com/yuwenkewen/';
-    const pageYear = ajax
-    const pageYear = await axios.get(baseUrl);
-    const yuwen = getChinese.getArticleYear(pageYear.data);
-
-    const duration = 6;
+    const pageYear = await utils.ajax({uri: baseUrl, method: 'get'});
+    const yuwen = serize.getArticleYear(pageYear.data);
+    // 获取文章名和url
+    const duration = 15;
     for (let i = 0; i < yuwen.length; i++) {
-      // console.log(yuwen[i]);
+      const cur = yuwen[i];
+      const article = await utils.ajax({ uri: cur.url, method: 'get'});
+      cur.list = serize.getArticleYearList(article.data);
+      for (let j = 0; j < cur.list.length; j ++) {
+        const curArticle = cur.list[j];
+        const articleHtml = await utils.ajax({ uri: curArticle.url, method: 'get'});
+        const $ = cheerio.load(articleHtml.data, {
+          decodeEntities: false
+        });
+        console.log(articleHtml.data);
+        curArticle.text = $('.articleContent').html();
+        console.log(curArticle.text);
+      }
     }
-
+    // 获取文章内容
+    const resultArticle = JSON.stringify(yuwen);
+    ctx.body = 'ok 抓取成功';
+    utils.exportJsonFile(resultArticle);
   } catch (err) {
     console.log(err);
   }
