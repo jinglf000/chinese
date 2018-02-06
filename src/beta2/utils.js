@@ -17,6 +17,7 @@ module.exports.ajaxDecode = axios.create({
   transformResponse: [(data) => iconv.decode(data, 'gb2312')]
 });
 
+// axios options的优先级 axios.get(options) > axios.create options > axios.defaults
 
 /**
  * 配合async await 使程序等待指定的时间

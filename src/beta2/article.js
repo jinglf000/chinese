@@ -50,7 +50,9 @@ const coreUrl = 'm.sbkk88.com';
  */
 module.exports.serializeYear = (data) => {
   const list = [];
-  const $ = cheerio.load(data);
+  const $ = cheerio.load(data, {
+    decodeEntities: false
+  });
   $('.index_list1 a').each((index, ele) => {
     const obj = getUrlTitle(ele, $);
     list.push(new ArticleYear(obj.title, obj.url))
@@ -65,7 +67,9 @@ module.exports.serializeYear = (data) => {
  */
 module.exports.serializeList = (data) => {
   const list = [];
-  const $ = cheerio.load(data);
+  const $ = cheerio.load(data, {
+    decodeEntities: false
+  });
   $('.index_list a').each((index, ele) => {
     const obj = getUrlTitle(ele, $);
     list.push(new Article(obj.title, obj.url))
@@ -78,7 +82,9 @@ module.exports.serializeList = (data) => {
  * @param {String} data htmlStr
  */
 module.exports.serializeArticle = (data) => {
-  const $ = cheerio.load(data);
+  const $ = cheerio.load(data, {
+    decodeEntities: false
+  });
   return $('.articleContent').html();
 }
 
