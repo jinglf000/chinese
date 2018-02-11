@@ -30,6 +30,7 @@ async function getArticleList() {
     
     for (let i = 0; i < list.length; i ++) {
       const current = list[i];
+      current.id = `typeid${i}`;
       const yearList = (await ajax.get(current.url)).data;
       current.list = article.serializeList(yearList);
 
@@ -37,10 +38,12 @@ async function getArticleList() {
         let m = 0;
         let promiseAll = [];
         while (current.list[j + m] && m < duration) {
-          const currentArticle = current.list[j + m];
+          const listnum = j + m;
+          const currentArticle = current.list[listnum];
           promiseAll.push(ajax.get(currentArticle.url).then((res) => {
             currentArticle.text = article.serializeArticle(res.data);
-            const obj = Object.assign({}, currentArticle, { type: current.title, id: articleId ++ });
+            currentArticle.id = `${current.id}_${listnum}`;
+            // const obj = Object.assign({}, currentArticle, { type: current.title, id: articleId ++ });
           }));
           m++;
         }
@@ -55,5 +58,6 @@ async function getArticleList() {
 
 console.time('time');
 getArticleList().then(res => {
-  utils.exportJsonFile(res);
+  utils.exportJsonFile('article.json', res);
+  console.timeEnd('time');
 });

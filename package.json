@@ -24,11 +24,14 @@
   "homepage": "https://github.com/jinglf000/chinese#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "chalk": "^2.3.0",
     "cheerio": "^1.0.0-rc.2",
     "iconv-lite": "^0.4.19",
     "koa": "^2.4.1",
     "koa-logger": "^3.1.0",
+    "koa-router": "^7.4.0",
     "mongoose": "^5.0.4",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "shelljs": "^0.8.1"
   }
 }
