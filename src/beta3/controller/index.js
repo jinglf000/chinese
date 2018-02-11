@@ -5,8 +5,34 @@
  */
 const dao = require('../dao');
 
-module.exports.getYearlist = () => dao.findYearList();
+/**
+ * 获取总分类列表
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.getYearlist = async (ctx, next) => {
+  const res = await dao.findYearList();
+  ctx.body = res;
+  next();
+}
+/**
+ * 获取分类列表下所有的课文
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.getYearArts = async (ctx, next) => {
+  const res = await dao.findYearArts(ctx.params.type);
+  ctx.body = res;
+  next();
+}
 
-module.exports.getYearArts = (type) => dao.findYearArts(type);
-
-module.exports.getArtsDetail = (id) => dao.getArtsDetail(id);
+/**
+ * 获取文章详情内容
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.getArtsDetail = async (ctx, next) => {
+  const res = await dao.findArtDetail(ctx.params.id);
+  ctx.body = res;
+  next();
+}

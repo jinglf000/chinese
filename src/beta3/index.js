@@ -6,14 +6,15 @@
 
 const Koa = require('koa');
 const Logger = require('koa-logger');
-const routers = require('./routers');
+const routerConf = require('./routers');
 const shell = require('shelljs');
 
+const routers = routerConf.routers;
 const app = new Koa();
 
 app.use(new Logger());
 
-app.use(routers.routers()).use(routers.allowedMethods());
+app.use(routers.routes()).use(routers.allowedMethods());
 
 app.listen(3000);
 
