@@ -6,21 +6,27 @@
 
 const Router = require('koa-router');
 const controller = require('./controller');
+const utils = require('./utils');
 
 const routers = new Router();
 
-routers.use(function (ctx, next) {
-  console.log('path?', ctx.path);
-  next();
-});
+/**
+ * 404 500 错误处理
+ */
+// routers.use(utils.exception);
 
 routers.get('/', controller.getYearlist);
 
-routers.redirect('/getList', '/');
+routers.get('/api/getList', controller.getYearlist);
 
-routers.get('/year/:type', controller.getYearArts);
+routers.get('/api/year/:type', controller.getYearArts);
 
-routers.get('/detail/:id', controller.getArtsDetail);
+routers.get('/api/detail/:id', controller.getArtsDetail);
 
+// routers.get('/s', controller)
+
+routers.get('/nofound', controller.nofound);
+
+routers.get('/sorry', controller.sorry);
 
 module.exports.routers = routers;

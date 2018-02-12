@@ -36,3 +36,22 @@ module.exports.getArtsDetail = async (ctx, next) => {
   ctx.body = res;
   next();
 }
+
+/**
+ * nofound 找不到404处理 
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.nofound = async (ctx, next) => {
+  ctx.body = '<p style="text-align:center;font-size:24px">找不到页面啦~~</p>'
+  next();
+}
+
+/**
+ * sorry 错误500处理
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.sorry = async (ctx, next) => {
+  ctx.body = '<p style="text-align:center;font-size:24px">服务起似乎不明白你的请求，请检查后在试。</p>'
+}

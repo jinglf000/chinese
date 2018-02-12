@@ -6,17 +6,23 @@
 
 const Koa = require('koa');
 const Logger = require('koa-logger');
-const routerConf = require('./routers');
+const static = require('koa-static');
 const shell = require('shelljs');
+
+const routerConf = require('./routers');
+const utils = require('./utils');
 
 const routers = routerConf.routers;
 const app = new Koa();
 
 app.use(new Logger());
+app.use(utils.exception);
+app.use(static('./static'));
 
 app.use(routers.routes()).use(routers.allowedMethods());
 
-app.listen(3000);
+app.listen(3000, () => {
+  shell.exec('start http://localhost:3000');
+});
 
-shell.exec('start http://localhost:3000');
 
