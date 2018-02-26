@@ -4,7 +4,8 @@
   "description": "中学 高中语文",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./src/beta3/index.js"
   },
   "repository": {
     "type": "git",

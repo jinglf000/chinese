@@ -31,9 +31,27 @@ const findArtDetail = function (id) {
   return article.Article.find({ id });
 }
 
+/**
+ * 关键字查询
+ * @param {String} key 关键字
+ * @return {Promise}
+ */
+const findArtByKeyWord = function (key) {
+  const regexp = new RegExp(key);
+  return article.Article.find().or([{ title: regexp }, { text: regexp }]);
+}
 
-
+/**
+ * 查询测试，对文章的正文内容进行查询
+ * @param {String} key 关键字
+ */
+const findTest = function (key) {
+  const regexp = new RegExp(key);
+  return article.Article.find().where('text', regexp);
+}
 
 module.exports.findYearList = findYearList;
 module.exports.findYearArts = findYearArts;
 module.exports.findArtDetail = findArtDetail;
+module.exports.findArtByKeyWord = findArtByKeyWord;
+module.exports.findTest = findTest;

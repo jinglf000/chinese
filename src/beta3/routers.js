@@ -23,7 +23,9 @@ routers.get('/api/year/:type', controller.getYearArts);
 
 routers.get('/api/detail/:id', controller.getArtsDetail);
 
-// routers.get('/s', controller)
+routers.get('/api/search/:key', controller.getArtsByKeyWord);
+
+routers.get('/api/s/:key', controller.getTest)
 
 routers.get('/nofound', controller.nofound);
 

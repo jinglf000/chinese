@@ -38,6 +38,28 @@ module.exports.getArtsDetail = async (ctx, next) => {
 }
 
 /**
+ * 关键字查询
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.getArtsByKeyWord = async (ctx, next) => {
+  const res = await dao.findArtByKeyWord(ctx.params.key);
+  ctx.body = res;
+  next();
+}
+
+/**
+ * 关键字查询
+ * @param {Object} ctx 
+ * @param {Function} next 
+ */
+module.exports.getTest = async (ctx, next) => {
+  const res = await dao.findTest(ctx.params.key);
+  ctx.body = res;
+  next();
+}
+
+/**
  * nofound 找不到404处理 
  * @param {Object} ctx 
  * @param {Function} next 
