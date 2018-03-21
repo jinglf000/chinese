@@ -1,4 +1,3 @@
-
 /**
  * 写入数据库
  * @author jinglf000
@@ -9,7 +8,7 @@ const article = require('./articleDao');
 const data = require('./article.json');
 const utils = require('./utils');
 
-for (let i = 0; i < data.length; i ++) {
+for (let i = 0; i < data.length; i++) {
   const current = data[i];
   const yearid = current.id;
   const year = new article.Year({
@@ -18,12 +17,15 @@ for (let i = 0; i < data.length; i ++) {
     url: current.url
   });
   // 对year进行保存
-  year.save().then((res) => {
-    utils.logSuccess(yearid);
-  }).catch((err) => {
-    utils.logError(yearid);
-  });
-  for (let j = 0; j < current.list.length; j ++) {
+  year
+    .save()
+    .then(res => {
+      utils.logSuccess(yearid);
+    })
+    .catch(err => {
+      utils.logError(yearid);
+    });
+  for (let j = 0, len = current.list.length; j < len; j++) {
     console.log(`${i}-${j}`);
     const curArticle = current.list[j];
     const articleCon = new article.Article({
@@ -33,10 +35,13 @@ for (let i = 0; i < data.length; i ++) {
       text: curArticle.text,
       type: yearid
     });
-    articleCon.save().then((res) => {
-      utils.logSuccess(curArticle.id);
-    }).catch((err) => {
-      utils.logError(curArticle.id);
-    })
+    articleCon
+      .save()
+      .then(res => {
+        utils.logSuccess(curArticle.id);
+      })
+      .catch(err => {
+        utils.logError(curArticle.id);
+      });
   }
 }

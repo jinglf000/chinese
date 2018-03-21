@@ -8,6 +8,7 @@ const Koa = require('koa');
 const Logger = require('koa-logger');
 const static = require('koa-static');
 const shell = require('shelljs');
+const compress = require('koa-compress');
 
 const routerConf = require('./routers');
 const utils = require('./utils');
@@ -15,14 +16,14 @@ const utils = require('./utils');
 const routers = routerConf.routers;
 const app = new Koa();
 
+// app.use(compress({ threshold: 2048 }));
 app.use(new Logger());
 app.use(utils.exception);
+app.use(utils.daoDataException);
 app.use(static('./static'));
 
 app.use(routers.routes()).use(routers.allowedMethods());
 
 app.listen(3000, () => {
-  shell.exec('start http://localhost:3000');
+  // shell.exec('start http://localhost:3000');
 });
-
-
