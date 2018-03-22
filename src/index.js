@@ -17,12 +17,16 @@ const utils = require('./utils');
 const routers = routerConf.routers;
 const app = new Koa();
 const port = 80;
+const staticOpts = {
+  maxage: 1000 * 60 * 60 * 24 * 365, // 1年，默认为0
+  gzip: true
+};
 
 // app.use(compress({ threshold: 2048 }));
 app.use(new Logger());
 app.use(utils.exception);
 app.use(utils.daoDataException);
-app.use(static(path.resolve(__dirname, './static')));
+app.use(static(path.resolve(__dirname, './static'), staticOpts));
 
 app.use(routers.routes()).use(routers.allowedMethods());
 
