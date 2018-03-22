@@ -25,7 +25,7 @@ routers.get('/api/detail/:id', controller.getArtsDetail);
 
 routers.get('/api/search/:key', controller.getArtsByKeyWord);
 
-routers.get('/api/s/:key', controller.getTest)
+routers.get('/api/s/:key', controller.getTest);
 
 routers.get('/nofound', controller.nofound);
 

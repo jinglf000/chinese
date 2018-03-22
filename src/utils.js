@@ -26,17 +26,21 @@ module.exports.exception = async (ctx, next) => {
   }
 };
 
+const pathApi_REG = /api/g;
 /**
  * @desc Dao Exception and interface return value
  */
 module.exports.daoDataException = async (ctx, next) => {
   try {
     await next();
-    ctx.body = {
-      code: conf.SUCCESS,
-      msg: conf.SUCCESS_MSG,
-      data: ctx.body
-    };
+    const path = ctx.request.path;
+    if (path.match(pathApi_REG)) {
+      ctx.body = {
+        code: conf.SUCCESS,
+        msg: conf.SUCCESS_MSG,
+        data: ctx.body
+      };
+    }
   } catch (err) {
     ctx.body = {
       code: conf.FAIL,
