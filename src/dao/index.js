@@ -11,8 +11,12 @@ const conf = require('../config');
  * @desc 返回{title,id}格式的类别数组
  * @return {Promise}
  */
-const findYearList = function() {
-  return article.Year.find(null, { title: 1, id: 1, _id: 0 });
+const findYearList = function () {
+  return article.Year.find(null, {
+    title: 1,
+    id: 1,
+    _id: 0
+  });
 };
 
 /**
@@ -21,8 +25,14 @@ const findYearList = function() {
  * @desc 根据文章类别查询所有，同类型的文章，返回{title，id}
  * @return {Promise}
  */
-const findYearArts = function(type) {
-  return article.Article.find({ type }, { title: 1, id: 1, _id: 0 });
+const findYearArts = function (type) {
+  return article.Article.find({
+    type
+  }, {
+    title: 1,
+    id: 1,
+    _id: 0
+  });
 };
 
 /**
@@ -31,8 +41,15 @@ const findYearArts = function(type) {
  * @desc 根据文章id查询文章内容，返回{id, text}
  * @return {Promise}
  */
-const findArtDetail = function(id) {
-  return article.Article.find({ id }, { id: 1, title: 1, text: 1, _id: 0 });
+const findArtDetail = function (id) {
+  return article.Article.find({
+    id
+  }, {
+    id: 1,
+    title: 1,
+    text: 1,
+    _id: 0
+  });
 };
 
 /**
@@ -41,10 +58,19 @@ const findArtDetail = function(id) {
  * @desc 根据关键字，查询所有的文章标题或者是内容，返回{title,id}
  * @return {Promise}
  */
-const findArtByKeyWord = function(key) {
+const findArtByKeyWord = function (key) {
   const regexp = new RegExp(key);
-  return article.Article.find(null, { title: 1, id: 1, _id: 0, text: 1 })
-    .or([{ title: regexp }, { text: regexp }])
+  return article.Article.find(null, {
+      title: 1,
+      id: 1,
+      _id: 0,
+      text: 1
+    })
+    .or([{
+      title: regexp
+    }, {
+      text: regexp
+    }])
     .limit(conf.FUZZY_QUERY_MAX);
 };
 
@@ -52,7 +78,7 @@ const findArtByKeyWord = function(key) {
  * 查询测试，对文章的正文内容进行查询
  * @param {String} key 关键字
  */
-const findTest = function(key) {
+const findTest = function (key) {
   const regexp = new RegExp(key);
   return article.Article.find().where('text', regexp);
 };
