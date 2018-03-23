@@ -11,7 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/jinglf000/chinese.git"
   },
-  "keywords": ["chinese", "中学", "语文", "高中"],
+  "keywords": [
+    "chinese",
+    "中学",
+    "语文",
+    "高中"
+  ],
   "author": "jinglf000",
   "license": "ISC",
   "bugs": {
@@ -24,7 +29,6 @@
     "cheerio": "^1.0.0-rc.2",
     "iconv-lite": "^0.4.19",
     "koa": "^2.4.1",
-    "koa-compress": "^2.0.0",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",

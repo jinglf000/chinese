@@ -36,11 +36,17 @@ module.exports.getArtsDetail = async (ctx, next) => {
  * 关键字查询
  */
 module.exports.getArtsByKeyWord = async (ctx, next) => {
-  const res = await dao.findArtByKeyWord(ctx.params.key);
-  res.forEach(item => {
+  const key = ctx.query.key;
+  const page = +ctx.query.page;
+  const list = await dao.findArtByKeyWord({ key, page });
+  list.forEach(item => {
     item.text = util.serizeSliceStr(item.text);
   });
-  ctx.body = res;
+  const total = await dao.findArtByKeyWordCount(key);
+  ctx.body = {
+    total,
+    list
+  };
   next();
 };
 

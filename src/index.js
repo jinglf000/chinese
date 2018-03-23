@@ -8,7 +8,6 @@ const Koa = require('koa');
 const Logger = require('koa-logger');
 const static = require('koa-static');
 const shell = require('shelljs');
-const compress = require('koa-compress');
 const path = require('path');
 
 const routerConf = require('./routers');
@@ -16,13 +15,12 @@ const utils = require('./utils');
 
 const routers = routerConf.routers;
 const app = new Koa();
-const port = 80;
+const port = 3000;
 const staticOpts = {
   maxage: 1000 * 60 * 60 * 24 * 365, // 1年，默认为0
   gzip: true
 };
 
-// app.use(compress({ threshold: 2048 }));
 app.use(new Logger());
 app.use(utils.exception);
 app.use(utils.daoDataException);
