@@ -5,6 +5,7 @@
  */
 const dao = require('../dao');
 const util = require('../utils');
+const conf = require('../config');
 
 /**
  * 获取总分类列表
@@ -32,19 +33,33 @@ module.exports.getArtsDetail = async (ctx, next) => {
   next();
 };
 
+let keysResultTotal = null;
+
 /**
- * 关键字查询
+ * 关键字查询，total 总页数
  */
 module.exports.getArtsByKeyWord = async (ctx, next) => {
   const key = ctx.query.key;
   const page = +ctx.query.page;
-  const list = await dao.findArtByKeyWord({ key, page });
-  list.forEach(item => {
-    item.text = util.serizeSliceStr(item.text);
-  });
-  const total = await dao.findArtByKeyWordCount(key);
+  let list = [];
+
+  // 对相同key内容查询，缓存查询总条数，并且对象里最多只有一次
+  if (keysResultTotal === null || keysResultTotal[key] === undefined) {
+    const total = await dao.findArtByKeyWordCount(key);
+    keysResultTotal = {
+      [key]: Math.ceil(total / conf.FUZZY_SINGLE_QUERY_MAX)
+    };
+  }
+
+  if (page <= keysResultTotal[key]) {
+    // 分批次查询
+    list = await dao.findArtByKeyWord({ key, page });
+    list.forEach(item => {
+      item.text = util.serizeSliceStr(item.text);
+    });
+  }
   ctx.body = {
-    total,
+    total: keysResultTotal[key],
     list
   };
   next();

@@ -17,10 +17,10 @@ const SUCCESS_MSG = 'successful';
 const SUMMERY_MAX_LENGTH = 30;
 
 /**模糊查询最大条数 */
-const FUZZY_QUERY_MAX = 10;
+const FUZZY_SINGLE_QUERY_MAX = 10;
 
 module.exports.SUCCESS = SUCCESS;
 module.exports.FAIL = FAIL;
 module.exports.SUCCESS_MSG = SUCCESS_MSG;
 module.exports.SUMMERY_MAX_LENGTH = SUMMERY_MAX_LENGTH;
-module.exports.FUZZY_QUERY_MAX = FUZZY_QUERY_MAX;
+module.exports.FUZZY_SINGLE_QUERY_MAX = FUZZY_SINGLE_QUERY_MAX;

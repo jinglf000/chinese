@@ -1,5 +1,5 @@
 /**
- * 数据库查询
+ * 数据库查询，基于Promise或者callback的查询
  * @author jinglf000
  * ###### Sun Feb 11 16:21:48 CST 2018
  */
@@ -67,7 +67,7 @@ const findArtDetail = function(id) {
  */
 const findArtByKeyWord = function(obj) {
   const regexp = new RegExp(obj.key);
-  const len = conf.FUZZY_QUERY_MAX;
+  const len = conf.FUZZY_SINGLE_QUERY_MAX;
   const page = +obj.page - 1;
   if (page < 0) {
     page = 0;
